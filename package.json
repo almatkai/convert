@@ -3,7 +3,7 @@
   "name": "convert",
   "title": "Web Converter",
   "description": "Converts everything web related: rem, px, pt, hex, hex (with opacity), rgb, rgba, hsl, hsla, oklch and shows the closest Tailwind CSS color.",
-  "icon": "icon.png",
+  "icon": "assets/icon.png",
   "author": "almatkai",
   "contributors": [
     "yusifaliyevpro",
