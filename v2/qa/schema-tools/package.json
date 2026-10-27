@@ -1,0 +1,1 @@
+{"name":"convert-v2-schema-qa","version":"1.0.0","private":true,"dependencies":{"ajv":"8.17.1","ajv-formats":"3.0.1"}}

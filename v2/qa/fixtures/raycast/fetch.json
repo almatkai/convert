@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/raycast/extensions/6734d85992290066fd31a7f5bee3cca3d3545a1a/extensions/convert/package.json",
+    "path": "extensions/convert/package.json",
+    "sha256": "c38c36b1a941c407130b9da841eeb8674c7d1ff6498b547076c18469efd6544f",
+    "size": 1725,
+    "status": 200
+  },
+  {
+    "url": "https://raw.githubusercontent.com/raycast/extensions/6734d85992290066fd31a7f5bee3cca3d3545a1a/extensions/web-converter/package.json",
+    "path": "extensions/web-converter/package.json",
+    "status": 404
+  },
+  {
+    "url": "https://raw.githubusercontent.com/raycast/extensions/6734d85992290066fd31a7f5bee3cca3d3545a1a/extensions/convert/assets/icon.png",
+    "path": "extensions/convert/assets/icon.png",
+    "sha256": "113f0d3d70e149928c4195570c6cfb1b26ca8d5bd378cdf9831b586548a5d15a",
+    "size": 18015,
+    "status": 200
+  },
+  {
+    "url": "https://raw.githubusercontent.com/raycast/extensions/6734d85992290066fd31a7f5bee3cca3d3545a1a/extensions/web-converter/assets/icon.png",
+    "path": "extensions/web-converter/assets/icon.png",
+    "status": 404
+  },
+  {
+    "url": "https://raw.githubusercontent.com/raycast/extensions/6734d85992290066fd31a7f5bee3cca3d3545a1a/LICENSE",
+    "path": "LICENSE",
+    "status": 200,
+    "sha256": "7f727f8b20cdd0e65f84e70b9cac2fce337dcecee4dc88955eb012ea27f02755",
+    "size": 1064
+  },
+  {
+    "url": "https://raw.githubusercontent.com/raycast/extensions/6734d85992290066fd31a7f5bee3cca3d3545a1a/extensions/convert/LICENSE",
+    "path": "extensions/convert/LICENSE",
+    "status": 404
+  }
+]

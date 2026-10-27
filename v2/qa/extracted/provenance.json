@@ -1,0 +1,37 @@
+[
+  {
+    "source": "src-tauri/src/native_core/extensions/process_host.rs",
+    "signature": "pub async fn request(",
+    "sha256": "fe459d75a5bfd7b27beecf2d27a3554b1d7195ab2520976bf81de97e144880fe",
+    "startByte": 6547,
+    "bytes": 8607
+  },
+  {
+    "source": "src-tauri/src/native_core/extensions/process_host.rs",
+    "signature": "fn granted(",
+    "sha256": "5e755ccddb0ec2e60d88409cd75d0923cbb74abf55cb966c1d475622ebf3cfb9",
+    "startByte": 5305,
+    "bytes": 253
+  },
+  {
+    "source": "src-tauri/src/native_core/extensions/process_host.rs",
+    "signature": "fn require(",
+    "sha256": "878b599a63fdd61fb8fc0e9b8a8b373544b97936e30f5880c6a0e05a5930e35d",
+    "startByte": 5563,
+    "bytes": 216
+  },
+  {
+    "source": "src-tauri/src/native_core/extensions/process_host.rs",
+    "signature": "fn string<'a>",
+    "sha256": "e8ee3e364a65b56ca90876b05edb853e21cd44bca5d9b1a5eb618b8e3b8c0488",
+    "startByte": 19442,
+    "bytes": 199
+  },
+  {
+    "source": "src-tauri/src/native_core/launcher/clipboard.rs",
+    "signature": "fn handle(&mut self,",
+    "sha256": "25b759184a8f76ee874064e8fd91f178eba618c1fd190ba5c593bd2e1f8a4bb8",
+    "startByte": 17974,
+    "bytes": 5960
+  }
+]

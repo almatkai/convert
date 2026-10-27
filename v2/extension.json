@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 3,
+  "id": "com.tezbar.native.convert",
+  "slug": "convert",
+  "name": "Web Converter",
+  "version": "0.1.0",
+  "description": "Converts everything web related: rem, px, pt, hex, hex (with opacity), rgb, rgba, hsl, hsla, oklch and shows the closest Tailwind CSS color.",
+  "icon": "resources/icon.png",
+  "runtime": "rust",
+  "execution": "process",
+  "protocolVersion": 1,
+  "repository": "https://github.com/almatkai/convert",
+  "author": "almatkai; original nielsvanrijn",
+  "platforms": [
+    "macOS",
+    "Windows"
+  ],
+  "commands": [
+    {
+      "name": "convert",
+      "title": "Convert Unit",
+      "mode": "view",
+      "platforms": [
+        "macOS",
+        "Windows"
+      ],
+      "runtime": "rust",
+      "concurrency": "serialize",
+      "timeoutMs": 15000,
+      "refreshMs": null,
+      "preferences": [
+        {
+          "name": "basePixel",
+          "type": "textfield",
+          "required": false,
+          "title": "Base PX Value",
+          "description": "The conversion will be calculated based on this property. Default 16px",
+          "placeholder": "16"
+        }
+      ]
+    }
+  ],
+  "preferences": [],
+  "replaces": [
+    "com.tezbar.convert",
+    "raycast.convert",
+    "raycast.web-converter"
+  ],
+  "capabilities": [
+    "clipboard.write"
+  ],
+  "artifacts": {},
+  "verification": [
+    {
+      "platform": "macOS",
+      "state": "not-run"
+    },
+    {
+      "platform": "Windows",
+      "state": "not-run"
+    }
+  ]
+}

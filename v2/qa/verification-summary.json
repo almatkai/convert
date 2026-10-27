@@ -1,0 +1,45 @@
+{
+  "oracleCases": 17041,
+  "sourceCallbacks": 78169,
+  "process": {
+    "views": 17041,
+    "copy_bytes": 31187,
+    "reverse_calls": 2167,
+    "churn": 180,
+    "revision_floor_checks": 7
+  },
+  "renderer": {
+    "fullModules": 6,
+    "scenarios": 28
+  },
+  "schema": {
+    "positive": 4,
+    "negative": 41,
+    "pinnedSchema": true
+  },
+  "hostCompilerBaseline": 34,
+  "hostCompilerProposed": 34,
+  "hostCompilerNovel": 0,
+  "cargoArchives": 48,
+  "npmTarballs": 97,
+  "hostApplied": false,
+  "macOSAcceptance": "not-run",
+  "windowsAcceptance": "not-run",
+  "windowsBinary": "blocked: x86_64-w64-mingw32-dlltool missing",
+  "archiveSha256": "2ac1abb780c77245f6483c06573a223cf43a3d04871badb5a78ed72bf9c0acc1",
+  "executableSha256": "cd7ec843f8e9a8a711effde840be69518ac5081be4e29c14752425ce59d04e12",
+  "zipMembers": 106,
+  "xerjInitial": "9/9 code files indexed, exit3 completed-with-junk; prefix ax-d6c17d284711",
+  "xerjFinal": "aborted frozen dataset/schema evolution for new v2/Cargo.toml; no bypass; Git/rg/hash fallback",
+  "productSourceBindingMatches": true,
+  "processAdditionalRegressions": [
+    "40 queued reader-order searches",
+    "late ACK after same-ID session replacement",
+    "1024-byte preference bound persists across queries",
+    "parent: crossed stale and duplicate revisions preserve newest model/tokens",
+    "parent: newer invalid draft raises monotonic input floor before content validation",
+    "parent: old callbacks after session replacement/unmount emit no RPC or model mutation"
+  ],
+  "liveSessionCapacity": 128,
+  "overflowSessionRejected": true
+}

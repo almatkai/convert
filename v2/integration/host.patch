@@ -1,0 +1,557 @@
+--- a/src/renderer/ExtensionRuntimeView.tsx
++++ b/src/renderer/ExtensionRuntimeView.tsx
+@@ -1,8 +1,8 @@
+-import { useCallback, useEffect, useRef, useState } from 'react'
++import { RuntimeInputOwnership, type Ticket } from './runtimeInputOwnership'
++import { useEffect, useRef, useState } from 'react'
+ import type {
+   ExtensionRunCommandResult,
+   ExtensionRuntimeAction,
+-  ExtensionRuntimeEffect,
+   ExtensionRuntimeNode,
+ } from '../shared/extensionRuntime'
+ import { startSessionRefresh } from './extensionSessionRefresh'
+@@ -35,42 +35,6 @@
+ type ActionNotice = {
+   message: string
+   tone: 'success' | 'error'
+-}
+-
+-function fallbackActionNotice(action: ExtensionRuntimeAction | undefined): string | null {
+-  if (!action) return null
+-  if (action.kind === 'copy' || /copy (?:gif|image|link|markdown)/i.test(action.title)) {
+-    return 'Copied to clipboard'
+-  }
+-  if (/add to favou?rites?/i.test(action.title)) return 'Added to Favorites'
+-  if (/remove from favou?rites?/i.test(action.title)) return 'Removed from Favorites'
+-  return null
+-}
+-
+-function effectNotice(effects: ExtensionRuntimeEffect[] | undefined): ActionNotice | null {
+-  const latest = [...(effects ?? [])]
+-    .reverse()
+-    .find((effect) => effect.kind === 'toast' || effect.kind === 'hud')
+-  if (!latest) return null
+-
+-  const title = latest.title?.trim()
+-  const message = latest.message?.trim()
+-  const status =
+-    latest.style === 'failure'
+-      ? 'Failed'
+-      : latest.style === 'success'
+-        ? 'Saved'
+-        : latest.style === 'animated'
+-          ? 'Working'
+-          : 'Done'
+-  const parts = [status]
+-  if (title && title.toLowerCase() !== status.toLowerCase()) parts.push(title)
+-  if (message) parts.push(message)
+-
+-  return {
+-    message: parts.join(' · '),
+-    tone: latest.style === 'failure' ? 'error' : 'success',
+-  }
+ }
+ 
+ function fromRunResult(
+@@ -416,282 +380,114 @@
+   )
+ }
+ 
+-export default function ExtensionRuntimeView({
+-  initial,
+-  onBack,
+-}: {
++function reusableControlIds(root: ExtensionRuntimeNode): Set<string> {
++  const ids = new Set<string>()
++  const visit = (node: ExtensionRuntimeNode): void => {
++    if (typeof node.props?.actionId === 'string') ids.add(node.props.actionId)
++    for (const child of node.children ?? []) visit(child)
++    const accessory = node.props?.searchBarAccessory
++    if (accessory && typeof accessory === 'object' && 'type' in accessory) visit(accessory as ExtensionRuntimeNode)
++  }
++  visit(root)
++  return ids
++}
++
++export default function ExtensionRuntimeView({ initial, onBack }: {
+   initial: Extract<ExtensionRunCommandResult, { ok: true; mode: 'view' }>
+   onBack: () => void
+ }): JSX.Element {
+   const [state, setState] = useState<RuntimeViewState>(() => fromRunResult(initial))
+   const [error, setError] = useState<string | null>(null)
+   const [actionNotice, setActionNotice] = useState<ActionNotice | null>(null)
+-  const searchRequestSeq = useRef(0)
+-  const currentSession = useRef<string | null>(null)
+-  const sessionOwner = `${state.sessionId}:${state.generation ?? ''}`
+-  currentSession.current = sessionOwner
+-  useEffect(
+-    () => () => {
+-      currentSession.current = null
+-      searchRequestSeq.current += 1
+-    },
+-    []
+-  )
+-  const disposeTimerRef = useRef<{ sessionId: string; timer: number } | null>(null)
+-  const actionNoticeTimerRef = useRef<number | null>(null)
+-
+-  const showActionNotice = useCallback((message: string, persist = false): void => {
+-    if (actionNoticeTimerRef.current !== null) {
+-      window.clearTimeout(actionNoticeTimerRef.current)
+-      actionNoticeTimerRef.current = null
+-    }
+-    const tone = /could not|failed|failure|error/i.test(message) ? 'error' : 'success'
+-    setActionNotice({ message, tone })
+-    if (persist) return
+-
+-    actionNoticeTimerRef.current = window.setTimeout(() => {
+-      actionNoticeTimerRef.current = null
+-      setActionNotice(null)
+-    }, 2400)
+-  }, [])
+-
+-  const isFormSurface = state.root.type.startsWith('Form')
+-
+-  const showActionFailure = useCallback(
+-    (message: string): void => {
+-      showActionNotice(`Failed · ${message}`, isFormSurface)
+-    },
+-    [isFormSurface, showActionNotice]
+-  )
+-
++  const gate = useRef(new RuntimeInputOwnership())
++  const active = useRef(true)
++  const controls = useRef(reusableControlIds(initial.root))
++  const controlDraft = useRef<Record<string, unknown>>({})
++  const owner = `${initial.sessionId}:${initial.generation ?? ''}:${initial.root.props?.nativeSessionGeneration ?? ''}`
++  const ownerRef = useRef('')
++  if (ownerRef.current !== owner) {
++    ownerRef.current = owner
++    controls.current = reusableControlIds(initial.root)
++    controlDraft.current = {}
++    gate.current.reset(typeof initial.root.props?.searchText === 'string' ? initial.root.props.searchText : '')
++  }
++  const current = (ticket: Ticket): boolean => active.current && ownerRef.current === owner && gate.current.current(ticket)
+   useEffect(() => {
+-    currentSession.current = `${initial.sessionId}:${initial.generation ?? ''}`
+-    searchRequestSeq.current += 1
+-    setState(fromRunResult(initial))
++    active.current = true
++    gate.current.reset(typeof initial.root.props?.searchText === 'string' ? initial.root.props.searchText : '')
++    setState(fromRunResult(initial)); setError(null); setActionNotice(null)
++    return () => { if (ownerRef.current === owner) { active.current = false; gate.current.reset('') } }
++  }, [owner])
++  // Exact session cleanup, including StrictMode remounts.
++  const dispose = useRef<{ owner: string; timer: number } | null>(null)
++  useEffect(() => {
++    if (dispose.current?.owner === owner) { window.clearTimeout(dispose.current.timer); dispose.current = null }
++    return () => {
++      const timer = window.setTimeout(() => {
++        if (dispose.current?.timer === timer) dispose.current = null
++        void window.tezbar.extensionDisposeSession({ sessionId: initial.sessionId })
++      }, 0)
++      dispose.current = { owner, timer }
++    }
++  }, [owner])
++  const revoke = (draft: string, keepControls = false): void => {
++    setState(prev => ({ ...prev, actions: [], root: { ...prev.root, children: keepControls ? prev.root.children : [], props: { ...prev.root.props, searchText: draft } }, message: undefined }))
++  }
++  const apply = (ticket: Ticket, result: ExtensionRunCommandResult | { ok: true; mode: 'unchanged' }): void => {
++    if (!current(ticket)) return
++    gate.current.finish(ticket)
++    if (!result || result.ok !== true) { setError(result?.message || 'Request failed'); return }
++    if (result.mode !== 'view') { if ('message' in result && result.message) setError(result.message); return }
++    if (result.sessionId !== initial.sessionId || result.generation !== initial.generation) return
++    if (!gate.current.accept(ticket, result.root)) { setError('Results no longer match the current input.'); return }
++    controls.current = reusableControlIds(result.root)
++    setState({ ...fromRunResult(result), root: { ...result.root, props: { ...result.root.props, searchText: gate.current.draft } } })
+     setError(null)
+-  }, [initial])
+-
+-  useEffect(
+-    () => () => {
+-      if (actionNoticeTimerRef.current !== null) {
+-        window.clearTimeout(actionNoticeTimerRef.current)
+-      }
+-    },
+-    []
+-  )
+-
+-  // Cancel only the same-session StrictMode remount; a new session must still
+-  // dispose its predecessor even when both effects run in the same render.
+-  useEffect(() => {
+-    const pending = disposeTimerRef.current
+-    if (pending?.sessionId === state.sessionId) {
+-      window.clearTimeout(pending.timer)
+-      disposeTimerRef.current = null
+-    }
+-    return () => {
+-      const sessionId = state.sessionId
+-      const timer = window.setTimeout(() => {
+-        if (disposeTimerRef.current?.timer === timer) disposeTimerRef.current = null
+-        void window.tezbar.extensionDisposeSession({ sessionId })
+-      }, 0)
+-      disposeTimerRef.current = { sessionId, timer }
+-    }
+-  }, [state.sessionId])
+-
+-  useEffect(() => {
+-    let cancelled = false
+-    const stop = startSessionRefresh({
+-      sessionId: state.sessionId,
+-      generation: state.generation,
+-      refreshMs: state.refreshMs,
+-      subscribe: window.tezbar.onExtensionSessionInvalidated,
+-      subscribeVisibility: window.tezbar.onWindowVisibility,
+-      refresh: async () => {
+-        try {
+-          const result = await window.tezbar.extensionRefreshSession({ sessionId: state.sessionId })
+-          if (cancelled || (result.ok && result.mode === 'unchanged')) return
+-          if (!result.ok) {
+-            setError(result.message)
+-            return
+-          }
+-          if (result.mode === 'no-view') {
+-            setState((prev) => ({ ...prev, message: result.message }))
+-            return
+-          }
+-          if (result.sessionId !== state.sessionId || result.generation !== state.generation) return
+-          setState(fromRunResult(result))
+-        } catch (error) {
+-          if (!cancelled) setError(error instanceof Error ? error.message : String(error))
+-        }
+-      },
+-    })
+-    return () => {
+-      cancelled = true
+-      stop()
+-    }
+-  }, [state.sessionId, state.generation, state.refreshMs])
+-
+-  const handleSearchTextChanged = useCallback(
+-    async (searchText: string) => {
+-      const requestSeq = searchRequestSeq.current + 1
+-      searchRequestSeq.current = requestSeq
+-      console.log(`[RuntimeView] Search text changed, sending to sandbox: "${searchText}"`)
+-      const result = await window.tezbar.extensionSearchTextChanged({
+-        sessionId: state.sessionId,
+-        searchText,
+-      })
+-      if (requestSeq !== searchRequestSeq.current || currentSession.current !== sessionOwner) return
+-
+-      if (!result.ok) {
+-        console.error('[RuntimeView] Search failed:', result.message)
+-        setError(result.message)
+-        return
+-      }
+-
+-      if (result.mode === 'no-view') {
+-        console.log('[RuntimeView] Search returned no-view result')
+-        setState((prev) => ({ ...prev, message: result.message }))
+-        return
+-      }
+-
+-      console.log(
+-        `[RuntimeView] Search returned view with root type="${result.root.type}", ${result.root.children?.length ?? 0} children`
+-      )
+-      setState({
+-        refreshMs: result.refreshMs,
+-        generation: result.generation,
+-        sessionId: result.sessionId,
+-        extensionId: result.extensionId,
+-        commandName: result.commandName,
+-        title: result.title,
+-        root: result.root,
+-        actions: result.actions,
+-        message: result.message,
+-      })
+-    },
+-    [state.sessionId, sessionOwner]
+-  )
+-
+-  const handleLoadMore = useCallback(async () => {
+-    const result = await window.tezbar.extensionLoadMore({ sessionId: state.sessionId })
+-    if (currentSession.current !== sessionOwner) return
+-    if (result.ok && result.mode === 'unchanged') return
+-    if (!result.ok) {
+-      setError(result.message)
+-      return
+-    }
+-    if (result.mode === 'no-view') {
+-      setState((prev) => ({ ...prev, message: result.message }))
+-      return
+-    }
+-    setState({
+-      refreshMs: result.refreshMs,
+-      generation: result.generation,
+-      sessionId: result.sessionId,
+-      extensionId: result.extensionId,
+-      commandName: result.commandName,
+-      title: result.title,
+-      root: result.root,
+-      actions: result.actions,
+-      message: result.message,
+-    })
+-  }, [state.sessionId, sessionOwner])
+-
+-  return (
+-    <div
+-      role="application"
+-      aria-label="Extension Runtime"
+-      className="view-sheet flex h-full min-h-0 w-full flex-col gap-2 outline-none animate-tezbar-scale-in"
+-    >
+-      <div className="min-h-0 flex-1">
+-        {state.root.type === 'Tezbar.PreferenceSetup' ? (
+-          <PreferenceSetupView
+-            root={state.root}
+-            onBack={onBack}
+-            onSaved={(next) => {
+-              setState(fromRunResult(next))
+-              setError(null)
+-            }}
+-          />
+-        ) : (
+-          <ExtensionRuntimeSurface
+-            sessionId={state.sessionId}
+-            title={state.title}
+-            extensionId={state.extensionId}
+-            commandName={state.commandName}
+-            root={state.root}
+-            actions={state.actions}
+-            actionNotice={actionNotice}
+-            onBack={onBack}
+-            onSearchTextChanged={handleSearchTextChanged}
+-            onLoadMore={handleLoadMore}
+-            onInvokeAction={async (actionId, formValues) => {
+-              setError(null)
+-              const invokedAction = state.actions.find((action) => action.id === actionId)
+-              if (isFormSurface && invokedAction?.kind === 'submit-form') {
+-                showActionNotice(`Working · ${invokedAction.title}…`, true)
+-              }
+-              const result = await window.tezbar.extensionInvokeAction({
+-                sessionId: state.sessionId,
+-                actionId,
+-                formValues,
+-              })
+-
+-              if (currentSession.current !== sessionOwner) return
+-              if (!result.ok) {
+-                setError(result.message)
+-                showActionFailure(result.message)
+-                return
+-              }
+-
+-              const effectNoticeValue = effectNotice(result.effects)
+-              const messageNotice = result.message?.trim()
+-                ? {
+-                    message: result.message.trim(),
+-                    tone: /could not|failed|failure|error/i.test(result.message)
+-                      ? ('error' as const)
+-                      : ('success' as const),
+-                  }
+-                : null
+-              const fallbackNotice = fallbackActionNotice(invokedAction)
+-              const notice =
+-                effectNoticeValue ||
+-                messageNotice ||
+-                (fallbackNotice ? { message: fallbackNotice, tone: 'success' as const } : null)
+-              if (notice) showActionNotice(notice.message, isFormSurface)
+-
+-              if (result.mode === 'no-view') {
+-                setState((prev) => ({ ...prev, message: undefined }))
+-                return
+-              }
+-
+-              setState({
+-                refreshMs: result.refreshMs,
+-                generation: result.generation,
+-                sessionId: result.sessionId,
+-                extensionId: result.extensionId,
+-                commandName: result.commandName,
+-                title: result.title,
+-                root: result.root,
+-                actions: result.actions,
+-                message: undefined,
+-              })
+-            }}
+-          />
+-        )}
+-      </div>
+-
+-      {error ? (
+-        <div className="glass-card shrink-0 px-3 py-2">
+-          <Message tone="error">{error}</Message>
+-        </div>
+-      ) : null}
+-
+-      {state.message ? (
+-        <div className="glass-card shrink-0 px-3 py-2">
+-          <Message>{state.message}</Message>
+-        </div>
+-      ) : null}
+-    </div>
+-  )
+-}
++    if (result.message) setActionNotice({message: result.message, tone: /unknown|failed|error/i.test(result.message) ? 'error' : 'success'})
++  }
++  const fail = (ticket: Ticket, error: unknown): void => {
++    if (!current(ticket)) return
++    gate.current.finish(ticket)
++    setError(error instanceof Error ? error.message : String(error))
++  }
++  const search = async (raw: unknown): Promise<void> => {
++    if (!active.current || ownerRef.current !== owner) return
++    const ticket = gate.current.input(raw)
++    revoke(gate.current.draft); setError(null); setActionNotice(null)
++    if (typeof raw !== 'string' || new TextEncoder().encode(raw).length > 4096) { fail(ticket, new Error('Enter a text value up to 4096 bytes.')); return }
++    try { apply(ticket, await window.tezbar.extensionSearchTextChanged({sessionId: initial.sessionId, searchText: raw, clientInputRevision: ticket.revision})) }
++    catch (error) { fail(ticket,error) }
++  }
++  const refresh = async (): Promise<void> => {
++    if (!active.current || ownerRef.current !== owner) return
++    const ticket = gate.current.read(); if (!ticket) return
++    try { apply(ticket,await window.tezbar.extensionRefreshSession({sessionId: initial.sessionId})) }
++    catch (error) { fail(ticket,error) }
++  }
++  useEffect(() => startSessionRefresh({sessionId: initial.sessionId, generation: initial.generation, refreshMs: initial.refreshMs,
++    subscribe: window.tezbar.onExtensionSessionInvalidated, subscribeVisibility: window.tezbar.onWindowVisibility,
++    refresh }), [owner])
++  const invoke = async (id: string, values?: Record<string,unknown>): Promise<void> => {
++    if (!active.current || ownerRef.current !== owner) return
++    const reusable = controls.current.has(id)
++    if (!reusable && !state.actions.some(a => a.id === id)) return
++    // Value controls carry the complete draft and own a separate input revision.
++    const control = reusable && Boolean(values && Object.prototype.hasOwnProperty.call(values, 'value'))
++    if (control) controlDraft.current = {...controlDraft.current, [id]: values?.value}
++    const ticket = control ? gate.current.input(gate.current.draft) : gate.current.action(id)
++    if (!ticket) return
++    if (control) revoke(gate.current.draft, true)
++    else setState(prev => ({...prev, actions: []}))
++    try { apply(ticket, await window.tezbar.extensionInvokeAction({sessionId: initial.sessionId, actionId: id,
++      formValues: control ? {...values, controlValues: {...controlDraft.current}, searchText: gate.current.draft, clientInputRevision: ticket.revision} : values})) }
++    catch (error) { fail(ticket,error) }
++  }
++  return <div role="application" aria-label="Extension Runtime" className="view-sheet flex h-full min-h-0 flex-col">
++    {state.root.type === 'Tezbar.PreferenceSetup' ? <PreferenceSetupView root={state.root} onBack={onBack} onSaved={next => {gate.current.reset(''); setState(fromRunResult(next)); setError(null)}} /> :
++      <ExtensionRuntimeSurface sessionId={state.sessionId} title={state.title} extensionId={state.extensionId} commandName={state.commandName}
++        root={state.root} actions={state.actions} actionNotice={actionNotice} onBack={onBack}
++        onSearchTextChanged={search} onLoadMore={refresh} onInvokeAction={invoke} />}
++    {error ? <div><Message tone="error">{error}</Message><Button onClick={() => void refresh()}>Refresh Results</Button></div> : null}
++    {state.message ? <Message>{state.message}</Message> : null}
++  </div>
++}
+--- /dev/null
++++ b/src/renderer/runtimeInputOwnership.ts
+@@ -0,0 +1,56 @@
++// Generic host prerequisite. Client revisions originate only at input time.
++export type Ticket = { epoch: number; revision: number; request: number }
++export class RuntimeInputOwnership {
++  private epoch = 0
++  private revision = 0
++  private request = 0
++  private pending: Ticket | null = null
++  private ready = true
++  private consumed = new Set<string>()
++  private modelRevision = -1
++  draft = ''
++  reset(draft: string): void {
++    this.epoch++; this.revision = 0; this.request++; this.pending = null
++    this.ready = true; this.consumed.clear(); this.modelRevision = -1; this.draft = draft
++  }
++  input(raw: unknown): Ticket {
++    // Revoke before even checking the type/size. Never dedupe A/B/A or controls.
++    this.revision++; this.request++; this.ready = false; this.consumed.clear()
++    const ticket = { epoch: this.epoch, revision: this.revision, request: this.request }
++    this.pending = ticket
++    if (typeof raw === 'string') this.draft = raw
++    return ticket
++  }
++  read(): Ticket | null {
++    if (this.pending) return null
++    const ticket = { epoch: this.epoch, revision: this.revision, request: ++this.request }
++    this.pending = ticket
++    return ticket
++  }
++  action(id: string): Ticket | null {
++    if (!this.ready || this.pending || this.consumed.has(id)) return null
++    this.consumed.add(id)
++    return this.read()
++  }
++  current(t: Ticket): boolean {
++    return t.epoch === this.epoch && t.revision === this.revision && t.request === this.request
++  }
++  finish(t: Ticket): boolean {
++    if (!this.current(t)) return false
++    if (this.pending === t) this.pending = null
++    return true
++  }
++  accept(t: Ticket, root: { props?: Record<string, unknown> }): boolean {
++    if (!this.current(t)) return false
++    const p = root.props ?? {}
++    if (typeof p.nativeModelRevision === 'number') {
++      // Echo verifies a client revision; it never advances it.
++      if (p.clientInputRevision !== t.revision && !(t.revision === 0 && p.clientInputRevision == null)) return false
++      if (p.searchText !== this.draft || p.nativeModelRevision < this.modelRevision) return false
++      this.modelRevision = p.nativeModelRevision
++    }
++    this.ready = true
++    return true
++  }
++  canAct(): boolean { return this.ready && this.pending === null }
++}
+--- a/src/renderer/src/raycast-api/list-runtime.tsx
++++ b/src/renderer/src/raycast-api/list-runtime.tsx
+@@ -510,7 +510,7 @@
+   )
+   const hasServerSearch = onSearchTextChanged !== undefined && root.props?.__hasServerSearch === true
+   const hasMore = root.props?.__hasMore === true
+-  const isColorConversionSurface = isColorConversionCommand(commandName, title, navigationTitle)
++  const isColorConversionSurface = !hasServerSearch && isColorConversionCommand(commandName, title, navigationTitle)
+   const hasManySearchOptions = (searchAccessory?.options.length ?? 0) > 4
+   const hasSearchPlaceholder =
+     typeof root.props?.searchBarPlaceholder === 'string' &&
+@@ -559,6 +559,7 @@
+   }, [searchAccessory])
+ 
+   useEffect(() => {
++    if (hasServerSearch) return
+     if (query === lastSentQuery.current) return
+     if (debounceTimer.current) {
+       clearTimeout(debounceTimer.current)
+@@ -572,7 +573,7 @@
+         clearTimeout(debounceTimer.current)
+       }
+     }
+-  }, [query, onSearchTextChanged])
++  }, [query, onSearchTextChanged, hasServerSearch])
+ 
+   const colorConversionRows = useMemo<ListRow[]>(() => {
+     if (!isColorConversionSurface) return []
+@@ -721,6 +722,7 @@
+                 value={query}
+                 onChange={(event) => {
+                   setQuery(event.target.value)
++                  if (hasServerSearch) void onSearchTextChanged(event.target.value)
+                   setSelected(0)
+                 }}
+                 placeholder={searchBarPlaceholder}
+--- a/src/shared/desktop-api.ts
++++ b/src/shared/desktop-api.ts
+@@ -151,6 +151,7 @@
+   extensionSearchTextChanged: (payload: {
+     sessionId: string
+     searchText: string
++    clientInputRevision?: number
+   }) => Promise<ExtensionSearchTextChangedResult>
+   extensionRefreshSession: (
+     payload: ExtensionRefreshSessionRequest
+--- a/src/shared/extensionRuntime.ts
++++ b/src/shared/extensionRuntime.ts
+@@ -145,6 +145,7 @@
+ export type ExtensionSearchTextChangedRequest = {
+   sessionId: string
+   searchText: string
++  clientInputRevision?: number
+ }
+ 
+ export type ExtensionRefreshSessionRequest = {

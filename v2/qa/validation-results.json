@@ -1,0 +1,152 @@
+[
+  {
+    "name": "npm-oracle",
+    "exit": 0,
+    "seconds": 0.625,
+    "logSha256": "8996c24b5d727de8d0c07a87aaf1dfedd6706d0d6ebbdafa0d270b15c07647b8"
+  },
+  {
+    "name": "npm-schema-tools",
+    "exit": 0,
+    "seconds": 0.258,
+    "logSha256": "254964f84b770d63a7048cf74aed867362e935ae02efcfc22ff2a3f411cd993f"
+  },
+  {
+    "name": "v1-typecheck",
+    "exit": 0,
+    "seconds": 0.758,
+    "logSha256": "f9099706094253e6693c0c1137b073c1a44aa0f14f73b8733a217d8dcbd596bc"
+  },
+  {
+    "name": "v1-test",
+    "exit": 0,
+    "seconds": 0.168,
+    "logSha256": "f44cde8766e7cfc99a05894ab46e03653c0f72e81f8bc3874bded5f7252aa765"
+  },
+  {
+    "name": "oracle",
+    "exit": 0,
+    "seconds": 0.765,
+    "logSha256": "0c43fad81163110a5a6b8f310a5dfd805e8aa443f188d164824dc7869a5b492b"
+  },
+  {
+    "name": "producer",
+    "exit": 0,
+    "seconds": 0.258,
+    "logSha256": "625926de16c11597fba9e0b2af4705924b4840cf3e960afd14872188a58d68c5"
+  },
+  {
+    "name": "renderer",
+    "exit": 0,
+    "seconds": 0.214,
+    "logSha256": "1847c5a7273cbbf3ae6d6c49b50dcb555dc67886efd1c02329ce896117b5a708"
+  },
+  {
+    "name": "host-type-context",
+    "exit": 0,
+    "seconds": 0.882,
+    "logSha256": "b22412a16a5dff97d6db8f9521797804b7f2ab32706382a25e5cdc1d4c60872f"
+  },
+  {
+    "name": "schema",
+    "exit": 0,
+    "seconds": 0.07,
+    "logSha256": "4a41be341fdb57d0e98fe780f5a15c21061c7710650de723d8d6fcb22b63f7ca"
+  },
+  {
+    "name": "extract-host",
+    "exit": 0,
+    "seconds": 0.023,
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "cargo-fetch",
+    "exit": 0,
+    "seconds": 0.108,
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "rustfmt",
+    "exit": 0,
+    "seconds": 0.151,
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "stable-test",
+    "exit": 0,
+    "seconds": 3.28,
+    "logSha256": "4e8d5a0ff99b2be4ff02befe1cdda21d7c1a1a658b23389d57f74341e001a7d3"
+  },
+  {
+    "name": "stable-clippy",
+    "exit": 0,
+    "seconds": 0.38,
+    "logSha256": "f5a8763f605b38511bbf1c638f151ea12d30e97f92c36f8cbc82610f3827c1ee"
+  },
+  {
+    "name": "1.85.0-test",
+    "exit": 0,
+    "seconds": 3.878,
+    "logSha256": "3ef6aead8987a436f28737a4295d84cc0eb480531442c3ec1edabba0c824e4f2"
+  },
+  {
+    "name": "1.85.0-clippy",
+    "exit": 0,
+    "seconds": 0.393,
+    "logSha256": "528a5978978c4abb992b2e176230cdb520d695194855204acacdc2aeb08cc4cd"
+  },
+  {
+    "name": "windows-gnu-check",
+    "exit": 0,
+    "seconds": 0.413,
+    "logSha256": "895282a06576d38f3c344b54ea2d6fb8ac3511b1fa8fc26693e59d4731de9a39"
+  },
+  {
+    "name": "windows-gnu-clippy",
+    "exit": 0,
+    "seconds": 0.334,
+    "logSha256": "ea704d730cce5aa2b0692a2e5f58556a436258016333b11cf1f0470f61eb5de4"
+  },
+  {
+    "name": "windows-gnu-build",
+    "exit": 101,
+    "seconds": 0.749,
+    "logSha256": "8cee60ea2ec5657373158efe577afe125b81c7a293279e407533ae2eb1635c89"
+  },
+  {
+    "name": "debug-build",
+    "exit": 0,
+    "seconds": 0.099,
+    "logSha256": "59639588a6f1826f129cbcd121edc07279dab94786f5fa5bde6b3439b2e845cc"
+  },
+  {
+    "name": "process-debug",
+    "exit": 0,
+    "seconds": 12.711,
+    "logSha256": "3247de86e0ba2b6b2f00096d5caed09f438945a43f143f980826264df5b4e27f"
+  },
+  {
+    "name": "archives-and-grants",
+    "exit": 0,
+    "seconds": 1.077,
+    "logSha256": "4f0dfd7e00a22bf571f59d17b083438c457e91c953da1b53fa4e464d4e275519"
+  },
+  {
+    "name": "fresh-release",
+    "exit": 0,
+    "seconds": 22.445,
+    "logSha256": "fedff66985309bf2c06618512acf8426035bedb43a0882be473a636c16cdcfef"
+  },
+  {
+    "name": "dev-zip",
+    "exit": 0,
+    "seconds": 1.347,
+    "logSha256": "94399ba65b6b6e4ea1b5867b9f25cc44d99a9c7f8698c01c123441b5d106872f"
+  },
+  {
+    "name": "extracted-process",
+    "exit": 0,
+    "seconds": 6.97,
+    "logSha256": "3247de86e0ba2b6b2f00096d5caed09f438945a43f143f980826264df5b4e27f"
+  }
+]
