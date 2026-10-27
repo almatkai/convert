@@ -1,0 +1,124 @@
+{
+  "head": "92e37e66e3fbeff22fbf9374c97af36a91832cd6",
+  "branch": "feat/native-v2-rust",
+  "emptyIndex": true,
+  "iconSha256": "113f0d3d70e149928c4195570c6cfb1b26ca8d5bd378cdf9831b586548a5d15a",
+  "verifiedGitFixtures": 65,
+  "v1": [
+    {
+      "path": ".gitignore",
+      "baselineSha256": "b027adcbb6131ef49be335e9a699657351ca3d5bb2b474379634d1714f5a585b",
+      "worktreeSha256": "b027adcbb6131ef49be335e9a699657351ca3d5bb2b474379634d1714f5a585b"
+    },
+    {
+      "path": ".prettierrc",
+      "baselineSha256": "af858765de11954366be23467b95bae5e1a86818411c6723df7542cea9ffd521",
+      "worktreeSha256": "af858765de11954366be23467b95bae5e1a86818411c6723df7542cea9ffd521"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "baselineSha256": "76a8ea4fac86fe5e620992a8148fea1c6cadb9b6a87038801d0b973f6cbe3a86",
+      "worktreeSha256": "76a8ea4fac86fe5e620992a8148fea1c6cadb9b6a87038801d0b973f6cbe3a86"
+    },
+    {
+      "path": "LICENSE",
+      "baselineSha256": "1d7dbdbcd4fe14dfa08334fab20bffad23c1290f195792a3a4420dadf9912f81",
+      "worktreeSha256": "1d7dbdbcd4fe14dfa08334fab20bffad23c1290f195792a3a4420dadf9912f81"
+    },
+    {
+      "path": "README.md",
+      "baselineSha256": "d24ea2b9e4124f19cc781a28af4cc3e85a6df0f3e57feed02f9e890e46c94b60",
+      "worktreeSha256": "e3cf73bb30e8c3cfe592c38d6dd2d1f03a153169678d7343e73df1fa16ecfb5a"
+    },
+    {
+      "path": "assets/icon.png",
+      "baselineSha256": "113f0d3d70e149928c4195570c6cfb1b26ca8d5bd378cdf9831b586548a5d15a",
+      "worktreeSha256": "113f0d3d70e149928c4195570c6cfb1b26ca8d5bd378cdf9831b586548a5d15a"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "baselineSha256": "be2989fe08a37b6e3b848f07b42ee15d92f3b8b812355bc0a28b2f0765884a99",
+      "worktreeSha256": "be2989fe08a37b6e3b848f07b42ee15d92f3b8b812355bc0a28b2f0765884a99"
+    },
+    {
+      "path": "metadata/web-converter-1.png",
+      "baselineSha256": "f86ee37bbea93574bbf26e153b1dab8f51a76ed202bb83b556247e44feb7027e",
+      "worktreeSha256": "f86ee37bbea93574bbf26e153b1dab8f51a76ed202bb83b556247e44feb7027e"
+    },
+    {
+      "path": "metadata/web-converter-2.png",
+      "baselineSha256": "086e9d3b736a15ee2d4bb727fe15074323b486c9869517f59442c43c634613a8",
+      "worktreeSha256": "086e9d3b736a15ee2d4bb727fe15074323b486c9869517f59442c43c634613a8"
+    },
+    {
+      "path": "metadata/web-converter-3.png",
+      "baselineSha256": "44a87ec694292ed84ced685f8b3e3d62665e4ab8f27c8b1bdd25c5181ff6ec5e",
+      "worktreeSha256": "44a87ec694292ed84ced685f8b3e3d62665e4ab8f27c8b1bdd25c5181ff6ec5e"
+    },
+    {
+      "path": "metadata/web-converter-4.png",
+      "baselineSha256": "b91ae87833a201c4ac20d46106aace242de32151fb67af95a7ba5adfcbfa04e4",
+      "worktreeSha256": "b91ae87833a201c4ac20d46106aace242de32151fb67af95a7ba5adfcbfa04e4"
+    },
+    {
+      "path": "metadata/web-converter-5.png",
+      "baselineSha256": "d518375dbbfb0d77e11e1b10057ad3f4df66a03e36664f6010c609c0de5c740a",
+      "worktreeSha256": "d518375dbbfb0d77e11e1b10057ad3f4df66a03e36664f6010c609c0de5c740a"
+    },
+    {
+      "path": "package-lock.json",
+      "baselineSha256": "f69cf8d21d4570d7437e236903808c445a3f4fdf5c4eb87db277489e39b64071",
+      "worktreeSha256": "f69cf8d21d4570d7437e236903808c445a3f4fdf5c4eb87db277489e39b64071"
+    },
+    {
+      "path": "package.json",
+      "baselineSha256": "87519d1b8c202774f505f4d51144228f9e0eb87a3be05f0351c2554ffd325247",
+      "worktreeSha256": "87519d1b8c202774f505f4d51144228f9e0eb87a3be05f0351c2554ffd325247"
+    },
+    {
+      "path": "raycast-env.d.ts",
+      "baselineSha256": "3e2816c7f25285c9ac3b4f6f888a2051aef354ebcf6aa72fd7ea0c09abe446ca",
+      "worktreeSha256": "3e2816c7f25285c9ac3b4f6f888a2051aef354ebcf6aa72fd7ea0c09abe446ca"
+    },
+    {
+      "path": "src/colors.ts",
+      "baselineSha256": "7e371da386b3443d49698333b1f578e6ef6521e34b71803633a37c336e68a99f",
+      "worktreeSha256": "7e371da386b3443d49698333b1f578e6ef6521e34b71803633a37c336e68a99f"
+    },
+    {
+      "path": "src/colorsConversion.ts",
+      "baselineSha256": "e3ed8b03bc7f5e2cfdf107260e09f7aeaa23da1d4c25143323fdba077dbe648e",
+      "worktreeSha256": "e3ed8b03bc7f5e2cfdf107260e09f7aeaa23da1d4c25143323fdba077dbe648e"
+    },
+    {
+      "path": "src/convert.tsx",
+      "baselineSha256": "9baf51385f812023ae84459002183aa08a23be38e303d690a6507b5647b301b3",
+      "worktreeSha256": "9baf51385f812023ae84459002183aa08a23be38e303d690a6507b5647b301b3"
+    },
+    {
+      "path": "src/matching.ts",
+      "baselineSha256": "7bac704ce895aaa857cd8773fac64bb50f7d394adb00f7b46efe6285332ee68a",
+      "worktreeSha256": "7bac704ce895aaa857cd8773fac64bb50f7d394adb00f7b46efe6285332ee68a"
+    },
+    {
+      "path": "src/spacings.ts",
+      "baselineSha256": "515a5007edee87a13bd8687c82a0a1c3769eb03f2c258e3a373f99bb2f58fc69",
+      "worktreeSha256": "515a5007edee87a13bd8687c82a0a1c3769eb03f2c258e3a373f99bb2f58fc69"
+    },
+    {
+      "path": "src/spacingsConversion.ts",
+      "baselineSha256": "52b9e8b5ad7cfdf9b93535467a0d0e728d96e1f6a431f70dae88d689dbd101c9",
+      "worktreeSha256": "52b9e8b5ad7cfdf9b93535467a0d0e728d96e1f6a431f70dae88d689dbd101c9"
+    },
+    {
+      "path": "test/convert.test.ts",
+      "baselineSha256": "dbce81e17de22364c5598abd3dc56bef3f3c42ae5b5ac849614ecaaa76e41c0a",
+      "worktreeSha256": "dbce81e17de22364c5598abd3dc56bef3f3c42ae5b5ac849614ecaaa76e41c0a"
+    },
+    {
+      "path": "tsconfig.json",
+      "baselineSha256": "b2a8b508c4c6341191f14aaa1adb56bd0b039697ade2f25cac3cfc3c0fcd9450",
+      "worktreeSha256": "b2a8b508c4c6341191f14aaa1adb56bd0b039697ade2f25cac3cfc3c0fcd9450"
+    }
+  ]
+}

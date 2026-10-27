@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-27T19:18:12.915084+00:00",
+  "parent": true,
+  "fullQa": "repeated after concrete parent fixes; all stages pass except known Windows linking missing dlltool",
+  "sourceOracleCases": 17041,
+  "originalCallbacks": 78169,
+  "process": {
+    "views": 17041,
+    "copy_bytes": 31187,
+    "reverse_calls": 2167,
+    "churn": 180,
+    "revision_floor_checks": 7
+  },
+  "renderer": {
+    "fullModules": 6,
+    "scenarios": 28
+  },
+  "immutableGitFiles": 65,
+  "freshOriginalIconBytes": 18015,
+  "iconSha256": "113f0d3d70e149928c4195570c6cfb1b26ca8d5bd378cdf9831b586548a5d15a",
+  "sourceBinding": {
+    "v2/Cargo.toml": "2b83aef0e4e05793535f979ae3bea63b29ed94a6149d651754d46d1dd9cc201f",
+    "v2/Cargo.lock": "9258a2537d9e6e5d4a5f664e3c3cbcd8207903bbf8927715fb5ca6c730b48dd5",
+    "v2/extension.json": "2c95c26fd2870c4ba263069d0f96ccf5c346e9d7eddc5e533df6d00fc4b59e01",
+    "v2/src/tailwind.json": "446e3e263f8d0d663e5535e9dee01c979d5a337cf05f3de5459c48361ae0c4ef",
+    "v2/src/adapter.rs": "9a73e3daecf730a5e3c885b41a5b8bc1d1596d43a981e7c29bbd961219a5afcb",
+    "v2/src/lib.rs": "e5e06a59c69aaf7cafa1e109f80fde2ab44e5c31c4deeb15e42a987c53edd245",
+    "v2/src/spacings.json": "56488ce45cd7d9f5870dfa37062e5b7f3137b32dfebf312e315a6a06a4f276b0",
+    "v2/src/main.rs": "f550c6533a141bb3eea730a681a9063a32873d6a25312d96bd00228db353ba77",
+    "v2/src/engine.rs": "368cc68ff68f4e4ff629a461a329e5b873ae606b206af33436f5d39ecb0b4c70"
+  },
+  "archiveSha256": "2ac1abb780c77245f6483c06573a223cf43a3d04871badb5a78ed72bf9c0acc1",
+  "binarySha256": "cd7ec843f8e9a8a711effde840be69518ac5081be4e29c14752425ce59d04e12",
+  "closedMembers": 106,
+  "fixes": [
+    "monotonic native client revision floor before content validation",
+    "pre-dispatch session/activity guard on old search/refresh/action callbacks"
+  ],
+  "hostPatch": "unapplied; disposable baseline git apply --check passed",
+  "acceptance": "macOS/Windows real OS/GUI and MSVC not-run; finite parity and 34 unchanged isolated compiler context diagnostics retained",
+  "publication": "User explicitly authorizes reviewed source PR merge into main; actual staged blobs must be checked before commit"
+}

@@ -1,0 +1,414 @@
+{
+  "baseline": [
+    {
+      "file": "src/renderer/ExtensionRuntimeView.tsx",
+      "line": 9,
+      "code": 2307,
+      "message": "Cannot find module './ui/primitives' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/form-runtime.tsx",
+      "line": 12,
+      "code": 2307,
+      "message": "Cannot find module '../../ui/primitives' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/form-runtime.tsx",
+      "line": 13,
+      "code": 2307,
+      "message": "Cannot find module './detail-runtime' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/form-runtime.tsx",
+      "line": 314,
+      "code": 7006,
+      "message": "Parameter 'coordinates' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/grid-runtime.tsx",
+      "line": 3,
+      "code": 2307,
+      "message": "Cannot find module '../../ui/primitives' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/grid-runtime.tsx",
+      "line": 4,
+      "code": 2307,
+      "message": "Cannot find module './grid-content' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/index.tsx",
+      "line": 5,
+      "code": 2307,
+      "message": "Cannot find module './detail-runtime' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/index.tsx",
+      "line": 22,
+      "code": 2307,
+      "message": "Cannot find module './hooks' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 6,
+      "code": 2307,
+      "message": "Cannot find module '../../ui/primitives' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 7,
+      "code": 2307,
+      "message": "Cannot find module '../../ui/Markdown' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 8,
+      "code": 2307,
+      "message": "Cannot find module './detail-runtime' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 9,
+      "code": 2307,
+      "message": "Cannot find module '../../colorConverter' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 579,
+      "code": 7006,
+      "message": "Parameter 'result' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 6,
+      "code": 2307,
+      "message": "Cannot find module './agent' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 7,
+      "code": 2307,
+      "message": "Cannot find module './chat' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 8,
+      "code": 2307,
+      "message": "Cannot find module './backgroundTasks' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 14,
+      "code": 2307,
+      "message": "Cannot find module './windowLayout' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 15,
+      "code": 2307,
+      "message": "Cannot find module './intent' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 16,
+      "code": 2307,
+      "message": "Cannot find module './clipboard' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 28,
+      "code": 2307,
+      "message": "Cannot find module './llmConfig' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 37,
+      "code": 2307,
+      "message": "Cannot find module './knowledge' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 38,
+      "code": 2307,
+      "message": "Cannot find module './nativeCommands' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 39,
+      "code": 2307,
+      "message": "Cannot find module './updater' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 40,
+      "code": 2307,
+      "message": "Cannot find module './systemStats' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 41,
+      "code": 2307,
+      "message": "Cannot find module './permissions' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 42,
+      "code": 2307,
+      "message": "Cannot find module './safety' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 43,
+      "code": 2307,
+      "message": "Cannot find module './quickNotes' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 44,
+      "code": 2307,
+      "message": "Cannot find module './snippets' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 52,
+      "code": 2307,
+      "message": "Cannot find module './search' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 53,
+      "code": 2307,
+      "message": "Cannot find module './voice' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 65,
+      "code": 2307,
+      "message": "Cannot find module './terminal' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 172,
+      "code": 2307,
+      "message": "Cannot find module '../shared/search' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/extensionRuntime.ts",
+      "line": 17,
+      "code": 2307,
+      "message": "Cannot find module './search' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/extensions.ts",
+      "line": 12,
+      "code": 2307,
+      "message": "Cannot find module './search' or its corresponding type declarations."
+    }
+  ],
+  "proposed": [
+    {
+      "file": "src/renderer/ExtensionRuntimeView.tsx",
+      "line": 9,
+      "code": 2307,
+      "message": "Cannot find module './ui/primitives' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/form-runtime.tsx",
+      "line": 12,
+      "code": 2307,
+      "message": "Cannot find module '../../ui/primitives' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/form-runtime.tsx",
+      "line": 13,
+      "code": 2307,
+      "message": "Cannot find module './detail-runtime' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/form-runtime.tsx",
+      "line": 314,
+      "code": 7006,
+      "message": "Parameter 'coordinates' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/grid-runtime.tsx",
+      "line": 3,
+      "code": 2307,
+      "message": "Cannot find module '../../ui/primitives' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/grid-runtime.tsx",
+      "line": 4,
+      "code": 2307,
+      "message": "Cannot find module './grid-content' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/index.tsx",
+      "line": 5,
+      "code": 2307,
+      "message": "Cannot find module './detail-runtime' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/index.tsx",
+      "line": 22,
+      "code": 2307,
+      "message": "Cannot find module './hooks' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 6,
+      "code": 2307,
+      "message": "Cannot find module '../../ui/primitives' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 7,
+      "code": 2307,
+      "message": "Cannot find module '../../ui/Markdown' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 8,
+      "code": 2307,
+      "message": "Cannot find module './detail-runtime' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 9,
+      "code": 2307,
+      "message": "Cannot find module '../../colorConverter' or its corresponding type declarations."
+    },
+    {
+      "file": "src/renderer/src/raycast-api/list-runtime.tsx",
+      "line": 580,
+      "code": 7006,
+      "message": "Parameter 'result' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 6,
+      "code": 2307,
+      "message": "Cannot find module './agent' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 7,
+      "code": 2307,
+      "message": "Cannot find module './chat' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 8,
+      "code": 2307,
+      "message": "Cannot find module './backgroundTasks' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 14,
+      "code": 2307,
+      "message": "Cannot find module './windowLayout' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 15,
+      "code": 2307,
+      "message": "Cannot find module './intent' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 16,
+      "code": 2307,
+      "message": "Cannot find module './clipboard' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 28,
+      "code": 2307,
+      "message": "Cannot find module './llmConfig' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 37,
+      "code": 2307,
+      "message": "Cannot find module './knowledge' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 38,
+      "code": 2307,
+      "message": "Cannot find module './nativeCommands' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 39,
+      "code": 2307,
+      "message": "Cannot find module './updater' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 40,
+      "code": 2307,
+      "message": "Cannot find module './systemStats' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 41,
+      "code": 2307,
+      "message": "Cannot find module './permissions' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 42,
+      "code": 2307,
+      "message": "Cannot find module './safety' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 43,
+      "code": 2307,
+      "message": "Cannot find module './quickNotes' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 44,
+      "code": 2307,
+      "message": "Cannot find module './snippets' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 52,
+      "code": 2307,
+      "message": "Cannot find module './search' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 53,
+      "code": 2307,
+      "message": "Cannot find module './voice' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 65,
+      "code": 2307,
+      "message": "Cannot find module './terminal' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/desktop-api.ts",
+      "line": 173,
+      "code": 2307,
+      "message": "Cannot find module '../shared/search' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/extensionRuntime.ts",
+      "line": 17,
+      "code": 2307,
+      "message": "Cannot find module './search' or its corresponding type declarations."
+    },
+    {
+      "file": "src/shared/extensions.ts",
+      "line": 12,
+      "code": 2307,
+      "message": "Cannot find module './search' or its corresponding type declarations."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+Web Converter / Convert Unit — external Rust development port.
+Own source: almatkai/convert, commit 92e37e66e3fbeff22fbf9374c97af36a91832cd6.
+Original Raycast extension: extensions/convert at
+6734d85992290066fd31a7f5bee3cca3d3545a1a (manifest name web-converter).
+Original author nielsvanrijn; contributors yusifaliyevpro,
+ridemountainpig, cedric25. Own Tezbar adaptation: almatkai.
+Original icon.png is preserved without transformation.
+Rust SDK 0.1.1, Apache-2.0, Git e955911f0bf5b558f9d3eb5183df0adc95c22af2.
+Authentic SDK grants/NOTICE and exact Cargo archive grants are in notices/.
+The r-efi AUTHORS file contains its actual multi-license grants and is retained.
+QA npm tools are not linked into or shipped with the executable.
+See qa/cargo-audit.json and qa/npm-audit.json for archive evidence.
